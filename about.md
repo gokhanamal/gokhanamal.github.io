@@ -12,4 +12,4 @@ I write short notes about building things, learning, and whatever I’m currentl
 - Website: [gnamal.com](https://gnamal.com)
 - GitHub: [@gokhanamal](https://github.com/gokhanamal)
 - X/Twitter: [@gokhanamal](https://x.com/gokhanamal)
-- LinkedIn: (send me your LinkedIn URL and I’ll add it)
+- LinkedIn: [gnamal](https://www.linkedin.com/in/gnamal/)

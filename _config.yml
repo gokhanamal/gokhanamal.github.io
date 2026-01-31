@@ -3,7 +3,7 @@ description: "Notes on building, investing, and life."
 author: "Gökhan Namal"
 
 # For GitHub Pages (user site)
-url: "https://gokhanamal.github.io"
+url: "https://gnamal.com"
 
 theme: minima
 
@@ -26,3 +26,4 @@ github_username: gokhanamal
 
 # Social
 twitter_username: gokhanamal
+linkedin_username: gnamal
