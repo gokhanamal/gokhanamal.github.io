@@ -20,6 +20,11 @@ show_excerpts: true
 
 header_pages:
   - about.md
+  - now.md
+  - projects.md
+  - uses.md
+  - tags.md
+  - search.md
 
 # Optional socials (edit later)
 github_username: gokhanamal

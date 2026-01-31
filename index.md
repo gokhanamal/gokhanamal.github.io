@@ -8,9 +8,16 @@ Hi, I’m **Gökhan Namal**.
 I write short notes about building, investing, and life.
 
 - [About](/about/)
-- [GitHub](https://github.com/gokhanamal)
-- [LinkedIn](https://www.linkedin.com/in/gnamal/)
-- [X/Twitter](https://x.com/gokhanamal)
+- [Now](/now/)
+- [Projects](/projects/)
+- [Uses](/uses/)
+- [Tags](/tags/)
+- [Search](/search/)
+
+---
+
+## Featured
+- (add 2–3 links you want to highlight)
 
 ---
 
