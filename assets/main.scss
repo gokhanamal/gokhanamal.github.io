@@ -1,0 +1,71 @@
+---
+---
+
+@import "minima";
+
+/* Minimalist overrides (steipete-ish: clean type, generous spacing) */
+
+:root {
+  --content-width: 720px;
+}
+
+.site-header {
+  border-top: 0;
+  border-bottom: 0;
+  padding: 2.5rem 0 1rem;
+}
+
+.site-title {
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.wrapper {
+  max-width: var(--content-width);
+}
+
+body {
+  font-size: 18px;
+  line-height: 1.7;
+}
+
+.post-title,
+.page-heading {
+  letter-spacing: -0.02em;
+}
+
+.post-content h2,
+.post-content h3 {
+  margin-top: 2.2rem;
+}
+
+/* Subtle link style */
+a {
+  text-underline-offset: 0.18em;
+}
+
+/* Optional dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #0b0d10;
+    color: #e9eef5;
+  }
+
+  .site-title,
+  .post-link,
+  a {
+    color: #e9eef5;
+  }
+
+  a:hover {
+    color: #b7d2ff;
+  }
+
+  code, pre {
+    background: #121620;
+  }
+
+  .site-footer {
+    border-top-color: rgba(255,255,255,0.08);
+  }
+}

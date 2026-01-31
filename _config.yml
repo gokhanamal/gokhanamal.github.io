@@ -1,2 +1,25 @@
+title: "Gökhan Namal"
+description: "Notes on building, investing, and life."
+author: "Gökhan Namal"
+
+# For GitHub Pages (user site)
+url: "https://gokhanamal.github.io"
+
 theme: minima
-title: "Gökhan"
+
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+minima:
+  skin: classic
+
+# Keep things minimalist
+show_excerpts: true
+
+header_pages:
+  - about.md
+
+# Optional socials (edit later)
+github_username: gokhanamal
