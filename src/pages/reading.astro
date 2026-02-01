@@ -24,7 +24,7 @@ function pick(tag: string, s: string) {
 }
 
 function unCDATA(s: string) {
-  return s.replace(/^<!\\[CDATA\\[/, "").replace(/\\]\\]>$/, "");
+  return s.replace(/^<!\[CDATA\[/, "").replace(/\]\]>$/, "");
 }
 
 function decodeHtml(s: string) {
@@ -38,7 +38,7 @@ function decodeHtml(s: string) {
 }
 
 function parseItems(xml: string): Book[] {
-  const items = xml.match(/<item>[\\s\\S]*?<\\/item>/gi) ?? [];
+  const items = xml.match(/<item>[\s\S]*?<\/item>/gi) ?? [];
   return items.map((it) => {
     const title = decodeHtml(unCDATA(pick("title", it)));
     const author = decodeHtml(unCDATA(pick("author_name", it)));
@@ -46,7 +46,7 @@ function parseItems(xml: string): Book[] {
 
     // Prefer direct book URL if present in description.
     const desc = unCDATA(pick("description", it));
-    const hrefMatch = desc.match(/href=\"(https:\/\/www\\.goodreads\\.com\/book\/show\/[^\"]+)\"/i);
+    const hrefMatch = desc.match(/href="(https:\/\/www\.goodreads\.com\/book\/show\/[^"]+)"/i);
     const url = hrefMatch ? decodeHtml(hrefMatch[1]) : decodeHtml(unCDATA(pick("link", it)));
 
     const pubDate = decodeHtml(unCDATA(pick("pubDate", it)));
