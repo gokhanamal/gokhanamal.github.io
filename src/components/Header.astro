@@ -30,9 +30,7 @@ const isActive = (path: string) => {
   Skip to content
 </a>
 
-<header
-  class="app-layout flex flex-col items-center justify-between sm:flex-row"
->
+<header class="app-layout flex flex-col items-center justify-between sm:flex-row">
   <div
     id="top-nav-wrap"
     class:list={[
@@ -48,6 +46,7 @@ const isActive = (path: string) => {
     >
       {SITE.title}
     </a>
+
     <nav
       id="nav-menu"
       class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
@@ -62,6 +61,7 @@ const isActive = (path: string) => {
         <IconX id="close-icon" class="hidden" />
         <IconMenuDeep id="menu-icon" />
       </button>
+
       <ul
         id="menu-items"
         class:list={[
@@ -72,25 +72,29 @@ const isActive = (path: string) => {
         ]}
       >
         <li class="col-span-2">
-          <a href="/posts" class:list={{ "active-nav": isActive("/posts") }}>
-            Posts
-          </a>
-        </li>
-        <li class="col-span-2">
-          <a href="/reading" class:list={{ "active-nav": isActive("/reading") }}>
+          <a
+            href="/reading"
+            class:list={{ "active-nav": isActive("/reading") }}
+          >
             Reading
           </a>
         </li>
+
         <li class="col-span-2">
-          <a href="/bookmarks" class:list={{ "active-nav": isActive("/bookmarks") }}>
+          <a
+            href="/bookmarks"
+            class:list={{ "active-nav": isActive("/bookmarks") }}
+          >
             Bookmarks
           </a>
         </li>
+
         <li class="col-span-2">
           <a href="/about" class:list={{ "active-nav": isActive("/about") }}>
             About
           </a>
         </li>
+
         {
           SITE.showArchives && (
             <li class="col-span-2">
@@ -111,6 +115,7 @@ const isActive = (path: string) => {
             </li>
           )
         }
+
         <li class="col-span-1 flex items-center justify-center">
           <LinkButton
             href="/search"
@@ -125,6 +130,7 @@ const isActive = (path: string) => {
             <span class="sr-only">Search</span>
           </LinkButton>
         </li>
+
         {
           SITE.lightAndDarkMode && (
             <li class="col-span-1 flex items-center justify-center">

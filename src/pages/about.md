@@ -14,3 +14,6 @@ This is my personal site — short notes about building, investing, and life.
 - LinkedIn: <https://www.linkedin.com/in/gnamal/>
 
 If you want to reach me, the easiest way is via LinkedIn or X.
+
+## Writing
+- Beliefs: <https://gnamal.com/beliefs>
