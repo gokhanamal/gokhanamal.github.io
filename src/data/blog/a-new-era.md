@@ -9,6 +9,9 @@ tags:
   - notes
 description: "A new era in my life."
 ---
+
+![New era](/assets/new-era.png)
+
 Welcome.
 
 I created this website to publish more about myself because I feel like I’ve just entered a new era in my life. Until this year (2026), I believed that writing code would be my job until retirement, but I don’t think that’s likely to be true anymore. Everything changed after LLMs, especially with the latest models like ChatGPT 5.2 or Claude Opus, because they can write code better than many of us.
