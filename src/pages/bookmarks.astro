@@ -1,0 +1,44 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+import bookmarks from "@/data/bookmarks.json";
+
+type Bookmark = {
+  url: string;
+  title: string;
+  image?: string;
+  description?: string;
+};
+
+const items = bookmarks as Bookmark[];
+---
+
+<Layout title={`Bookmarks | ${SITE.title}`}>
+  <Header />
+  <Main pageTitle="Bookmarks" pageDesc="A small list of links I keep coming back to.">
+    <ul class="mt-6 grid gap-4 sm:grid-cols-2">
+      {items.map((b) => (
+        <li class="rounded-xl border border-border p-4">
+          <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
+            {b.image && (
+              <img src={b.image} alt="" loading="lazy" class="h-20 w-20 rounded-lg border border-border object-cover" />
+            )}
+            <div>
+              <div class="font-semibold">{b.title}</div>
+              {b.description && <div class="mt-1 text-sm opacity-80">{b.description}</div>}
+              <div class="mt-2 text-xs opacity-60">{b.url}</div>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <p class="mt-8 text-sm opacity-70">
+      Edit: <code>src/data/bookmarks.json</code>
+    </p>
+  </Main>
+  <Footer />
+</Layout>

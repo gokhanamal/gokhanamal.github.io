@@ -1,0 +1,143 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import { SITE } from "@/config";
+
+type Shelf = "currently-reading" | "read" | "to-read";
+
+type Book = {
+  title: string;
+  author?: string;
+  image?: string;
+  url?: string;
+  date?: string;
+};
+
+const USER_ID = "58980151";
+
+function pick(tag: string, s: string) {
+  const re = new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i");
+  const m = s.match(re);
+  return m ? m[1] : "";
+}
+
+function unCDATA(s: string) {
+  return s.replace(/^<!\\[CDATA\\[/, "").replace(/\\]\\]>$/, "");
+}
+
+function decodeHtml(s: string) {
+  return s
+    .replaceAll("&amp;", "&")
+    .replaceAll("&quot;", '"')
+    .replaceAll("&#39;", "'")
+    .replaceAll("&lt;", "<")
+    .replaceAll("&gt;", ">")
+    .trim();
+}
+
+function parseItems(xml: string): Book[] {
+  const items = xml.match(/<item>[\\s\\S]*?<\\/item>/gi) ?? [];
+  return items.map((it) => {
+    const title = decodeHtml(unCDATA(pick("title", it)));
+    const author = decodeHtml(unCDATA(pick("author_name", it)));
+    const image = decodeHtml(unCDATA(pick("book_medium_image_url", it))) || decodeHtml(unCDATA(pick("book_image_url", it)));
+
+    // Prefer direct book URL if present in description.
+    const desc = unCDATA(pick("description", it));
+    const hrefMatch = desc.match(/href=\"(https:\/\/www\\.goodreads\\.com\/book\/show\/[^\"]+)\"/i);
+    const url = hrefMatch ? decodeHtml(hrefMatch[1]) : decodeHtml(unCDATA(pick("link", it)));
+
+    const pubDate = decodeHtml(unCDATA(pick("pubDate", it)));
+
+    return { title, author, image, url, date: pubDate };
+  });
+}
+
+async function fetchShelf(shelf: Shelf): Promise<Book[]> {
+  const url = `https://www.goodreads.com/review/list_rss/${USER_ID}?shelf=${encodeURIComponent(shelf)}`;
+  const res = await fetch(url);
+  if (!res.ok) return [];
+  const xml = await res.text();
+  return parseItems(xml);
+}
+
+const [currentlyReading, read, toRead] = await Promise.all([
+  fetchShelf("currently-reading"),
+  fetchShelf("read"),
+  fetchShelf("to-read"),
+]);
+---
+
+<Layout title={`Reading | ${SITE.title}`}>
+  <Header />
+  <Main
+    pageTitle="Reading"
+    pageDesc="A live snapshot pulled from my Goodreads shelves."
+  >
+    <div class="space-y-10">
+      <section>
+        <h2 class="text-2xl font-semibold tracking-wide">Currently reading</h2>
+        <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+          {currentlyReading.slice(0, 6).map((b) => (
+            <li class="rounded-xl border border-border p-4">
+              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
+                {b.image && (
+                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
+                )}
+                <div>
+                  <div class="font-semibold">{b.title}</div>
+                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-wide">Read (recent)</h2>
+        <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+          {read.slice(0, 10).map((b) => (
+            <li class="rounded-xl border border-border p-4">
+              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
+                {b.image && (
+                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
+                )}
+                <div>
+                  <div class="font-semibold">{b.title}</div>
+                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <section>
+        <h2 class="text-2xl font-semibold tracking-wide">Want to read</h2>
+        <ul class="mt-4 grid gap-4 sm:grid-cols-2">
+          {toRead.slice(0, 8).map((b) => (
+            <li class="rounded-xl border border-border p-4">
+              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
+                {b.image && (
+                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
+                )}
+                <div>
+                  <div class="font-semibold">{b.title}</div>
+                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
+                </div>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      <p class="text-sm opacity-80">
+        Source: <a class="underline hover:text-accent" href="https://www.goodreads.com/user/show/58980151-g-khan" target="_blank" rel="noreferrer">Goodreads profile</a>
+      </p>
+    </div>
+  </Main>
+  <Footer />
+</Layout>
