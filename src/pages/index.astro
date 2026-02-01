@@ -57,14 +57,14 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           </div>
         </div>
 
-        <figure class="sm:w-[240px]">
+        <figure class="order-first mx-auto sm:order-last sm:mx-0 sm:w-[240px]">
           <img
             src="/assets/home.jpg"
             width="240"
             height="240"
             loading="eager"
             decoding="async"
-            class="h-60 w-60 rounded-full border border-border object-cover shadow-sm"
+            class="h-40 w-40 rounded-full border border-border object-cover shadow-sm sm:h-60 sm:w-60"
             alt=""
           />
         </figure>
