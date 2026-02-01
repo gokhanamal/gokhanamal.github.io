@@ -4,5 +4,17 @@
     "title": "gnamal.com",
     "image": "/assets/home.jpg",
     "description": "My home on the internet."
+  },
+  {
+    "url": "https://pragmaticengineer.com/",
+    "title": "The Pragmatic Engineer",
+    "image": "",
+    "description": "Deep dives on software engineering, tech leadership, and the industry."
+  },
+  {
+    "url": "https://leerob.com/beliefs",
+    "title": "Things I Believe (Lee Robinson)",
+    "image": "",
+    "description": "A concise list of principles on shipping, learning, and leadership."
   }
 ]
