@@ -4,7 +4,8 @@ export const SITE = {
   profile: "https://gnamal.com/",
   desc: "Notes on building, investing, and life.",
   title: "Gökhan Namal",
-  ogImage: "astropaper-og.jpg",
+  // Social preview image (OpenGraph/Twitter)
+  ogImage: "assets/home.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
