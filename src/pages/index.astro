@@ -23,39 +23,51 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <Header />
   <main id="main-content" data-layout="index" class="app-layout">
     <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
-      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Gökhan Namal
-      </h1>
-      <a
-        target="_blank"
-        href="/rss.xml"
-        class="inline-block"
-        aria-label="rss feed"
-        title="RSS Feed"
-      >
-        <IconRss
-          width={20}
-          height={20}
-          class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
-        />
-        <span class="sr-only">RSS Feed</span>
-      </a>
+      <div class="flex flex-col gap-6 sm:flex-row sm:items-start sm:gap-8">
+        <div class="sm:flex-1">
+          <h1 class="my-0 inline-block text-4xl font-bold sm:text-5xl">
+            Gökhan Namal
+          </h1>
 
-      <p>
-        Notes on building, investing, and life.
-      </p>
-      <p class="mt-2">
-        Start with the <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="/about">about page</LinkButton>.
-      </p>
-      {
-        // only display if at least one social link is enabled
-        SOCIALS.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">Social Links:</div>
-            <Socials />
+          <p class="mt-3">
+            Notes on building, investing, and life.
+          </p>
+          <p class="mt-2">
+            Start with the <LinkButton class="underline decoration-dashed underline-offset-4 hover:text-accent" href="/about">about page</LinkButton>.
+          </p>
+
+          <div class="mt-3 flex items-center gap-3">
+            <a
+              target="_blank"
+              href="/rss.xml"
+              class="inline-flex items-center"
+              aria-label="rss feed"
+              title="RSS Feed"
+            >
+              <IconRss
+                width={20}
+                height={20}
+                class="scale-125 stroke-accent stroke-3 rtl:-rotate-90"
+              />
+              <span class="sr-only">RSS Feed</span>
+            </a>
+
+            {SOCIALS.length > 0 && <Socials />}
           </div>
-        )
-      }
+        </div>
+
+        <figure class="sm:w-[240px]">
+          <img
+            src="/assets/home.jpg"
+            width="240"
+            height="320"
+            loading="eager"
+            decoding="async"
+            class="w-full rounded-xl border border-border object-cover shadow-sm"
+            alt=""
+          />
+        </figure>
+      </div>
     </section>
 
     {
