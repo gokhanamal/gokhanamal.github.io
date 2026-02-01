@@ -14,12 +14,12 @@ html[data-theme="light"] {
 }
 
 html[data-theme="dark"] {
-  /* Astro Deep Purple (from AstroPaper predefined schemes) */
-  --background: #212737;
-  --foreground: #eaedf3;
-  --accent: #eb3fd3;
-  --muted: #7d4f7c;
-  --border: #642451;
+  /* Leaf Blue (same palette for dark mode as requested) */
+  --background: #f2f5ec;
+  --foreground: #353538;
+  --accent: #1158d1;
+  --muted: #bbc789;
+  --border: #7cadff;
 }
 
 @theme inline {
