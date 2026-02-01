@@ -23,10 +23,12 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
     ]}
   >
     <Socials />
-    <div class="my-2 flex flex-col items-center whitespace-nowrap sm:flex-row">
-      <span>Copyright &#169; {currentYear}</span>
-      <span class="hidden sm:inline">&nbsp;|&nbsp;</span>
-      <span>All rights reserved.</span>
+    <div class="my-2 flex flex-col items-center text-center sm:flex-row">
+      <span>
+        Made with care. Feel free to reuse anything here (unless noted otherwise).
+      </span>
+      <span class="hidden sm:inline">&nbsp;·&nbsp;</span>
+      <span class="opacity-80">© {currentYear} Gökhan Namal</span>
     </div>
   </div>
 </footer>
