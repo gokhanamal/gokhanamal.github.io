@@ -17,3 +17,7 @@ If you want to reach me, the easiest way is via LinkedIn or X.
 
 ## Writing
 - Beliefs: <https://gnamal.com/beliefs>
+
+## Apps
+- App Store developer page: <https://apps.apple.com/us/developer/gokhan-namal/id1476997783>
+- This site: <https://gnamal.com/apps>
