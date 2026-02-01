@@ -2,8 +2,6 @@
 import type { HTMLAttributes } from "astro/types";
 import Socials from "./Socials.astro";
 
-const currentYear = new Date().getFullYear();
-
 type Props = {
   noMarginTop?: boolean;
 } & HTMLAttributes<"footer">;
@@ -24,13 +22,33 @@ const { noMarginTop = false, class: className, ...attrs } = Astro.props;
   >
     <div class="flex flex-col items-center text-center sm:items-start sm:text-left">
       <span>
-        <a class="underline underline-offset-4 hover:text-accent" href="https://github.com/gokhanamal/gokhanamal.github.io" target="_blank" rel="noreferrer">Steal this site</a>
+        <a
+          class="underline underline-offset-4 hover:text-accent"
+          href="https://github.com/gokhanamal/gokhanamal.github.io"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Steal this site
+        </a>
         &nbsp;→&nbsp;
-        <a class="underline underline-offset-4 hover:text-accent" href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noreferrer">Content CC BY 4.0</a>
+        <a
+          class="underline underline-offset-4 hover:text-accent"
+          href="https://creativecommons.org/licenses/by/4.0/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Content CC BY 4.0
+        </a>
         &nbsp;·&nbsp;
-        <a class="underline underline-offset-4 hover:text-accent" href="https://github.com/gokhanamal/gokhanamal.github.io/blob/main/LICENSE" target="_blank" rel="noreferrer">Code MIT</a>
+        <a
+          class="underline underline-offset-4 hover:text-accent"
+          href="https://github.com/gokhanamal/gokhanamal.github.io/blob/main/LICENSE"
+          target="_blank"
+          rel="noreferrer"
+        >
+          Code MIT
+        </a>
       </span>
-      <span class="mt-1 opacity-80">Built with Astro &nbsp;·&nbsp; © {currentYear} Gökhan Namal</span>
     </div>
 
     <Socials />
