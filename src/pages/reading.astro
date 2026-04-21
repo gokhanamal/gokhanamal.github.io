@@ -39,15 +39,21 @@ function decodeHtml(s: string) {
 
 function parseItems(xml: string): Book[] {
   const items = xml.match(/<item>[\s\S]*?<\/item>/gi) ?? [];
-  return items.map((it) => {
+  return items.map(it => {
     const title = decodeHtml(unCDATA(pick("title", it)));
     const author = decodeHtml(unCDATA(pick("author_name", it)));
-    const image = decodeHtml(unCDATA(pick("book_medium_image_url", it))) || decodeHtml(unCDATA(pick("book_image_url", it)));
+    const image =
+      decodeHtml(unCDATA(pick("book_medium_image_url", it))) ||
+      decodeHtml(unCDATA(pick("book_image_url", it)));
 
     // Prefer direct book URL if present in description.
     const desc = unCDATA(pick("description", it));
-    const hrefMatch = desc.match(/href="(https:\/\/www\.goodreads\.com\/book\/show\/[^"]+)"/i);
-    const url = hrefMatch ? decodeHtml(hrefMatch[1]) : decodeHtml(unCDATA(pick("link", it)));
+    const hrefMatch = desc.match(
+      /href="(https:\/\/www\.goodreads\.com\/book\/show\/[^"]+)"/i
+    );
+    const url = hrefMatch
+      ? decodeHtml(hrefMatch[1])
+      : decodeHtml(unCDATA(pick("link", it)));
 
     const pubDate = decodeHtml(unCDATA(pick("pubDate", it)));
 
@@ -80,62 +86,109 @@ const [currentlyReading, read, toRead] = await Promise.all([
       <section>
         <h2 class="text-2xl font-semibold tracking-wide">Currently reading</h2>
         <ul class="mt-4 grid gap-4 sm:grid-cols-2">
-          {currentlyReading.slice(0, 6).map((b) => (
-            <li class="rounded-xl border border-border p-4">
-              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
-                {b.image && (
-                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
-                )}
-                <div>
-                  <div class="font-semibold">{b.title}</div>
-                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
-                </div>
-              </a>
-            </li>
-          ))}
+          {
+            currentlyReading.slice(0, 6).map(b => (
+              <li class="rounded-xl border border-border p-4">
+                <a
+                  class="flex gap-4 hover:text-accent"
+                  href={b.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {b.image && (
+                    <img
+                      src={b.image}
+                      alt=""
+                      loading="lazy"
+                      class="h-24 w-16 rounded-md border border-border object-cover"
+                    />
+                  )}
+                  <div>
+                    <div class="font-semibold">{b.title}</div>
+                    {b.author && (
+                      <div class="text-sm opacity-80">{b.author}</div>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold tracking-wide">Read (recent)</h2>
         <ul class="mt-4 grid gap-4 sm:grid-cols-2">
-          {read.slice(0, 10).map((b) => (
-            <li class="rounded-xl border border-border p-4">
-              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
-                {b.image && (
-                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
-                )}
-                <div>
-                  <div class="font-semibold">{b.title}</div>
-                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
-                </div>
-              </a>
-            </li>
-          ))}
+          {
+            read.slice(0, 10).map(b => (
+              <li class="rounded-xl border border-border p-4">
+                <a
+                  class="flex gap-4 hover:text-accent"
+                  href={b.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {b.image && (
+                    <img
+                      src={b.image}
+                      alt=""
+                      loading="lazy"
+                      class="h-24 w-16 rounded-md border border-border object-cover"
+                    />
+                  )}
+                  <div>
+                    <div class="font-semibold">{b.title}</div>
+                    {b.author && (
+                      <div class="text-sm opacity-80">{b.author}</div>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 
       <section>
         <h2 class="text-2xl font-semibold tracking-wide">Want to read</h2>
         <ul class="mt-4 grid gap-4 sm:grid-cols-2">
-          {toRead.slice(0, 8).map((b) => (
-            <li class="rounded-xl border border-border p-4">
-              <a class="flex gap-4 hover:text-accent" href={b.url} target="_blank" rel="noreferrer">
-                {b.image && (
-                  <img src={b.image} alt="" loading="lazy" class="h-24 w-16 rounded-md border border-border object-cover" />
-                )}
-                <div>
-                  <div class="font-semibold">{b.title}</div>
-                  {b.author && <div class="text-sm opacity-80">{b.author}</div>}
-                </div>
-              </a>
-            </li>
-          ))}
+          {
+            toRead.slice(0, 8).map(b => (
+              <li class="rounded-xl border border-border p-4">
+                <a
+                  class="flex gap-4 hover:text-accent"
+                  href={b.url}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  {b.image && (
+                    <img
+                      src={b.image}
+                      alt=""
+                      loading="lazy"
+                      class="h-24 w-16 rounded-md border border-border object-cover"
+                    />
+                  )}
+                  <div>
+                    <div class="font-semibold">{b.title}</div>
+                    {b.author && (
+                      <div class="text-sm opacity-80">{b.author}</div>
+                    )}
+                  </div>
+                </a>
+              </li>
+            ))
+          }
         </ul>
       </section>
 
       <p class="text-sm opacity-80">
-        Source: <a class="underline hover:text-accent" href="https://www.goodreads.com/user/show/58980151-g-khan" target="_blank" rel="noreferrer">Goodreads profile</a>
+        Source: <a
+          class="underline hover:text-accent"
+          href="https://www.goodreads.com/user/show/58980151-g-khan"
+          target="_blank"
+          rel="noreferrer">Goodreads profile</a
+        >
       </p>
     </div>
   </Main>

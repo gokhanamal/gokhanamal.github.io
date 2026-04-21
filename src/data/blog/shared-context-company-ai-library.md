@@ -79,10 +79,26 @@ The `marketplace.json` at the root is the catalog:
   "owner": { "name": "Acme DevTools Team", "email": "devtools@acme.com" },
   "metadata": { "pluginRoot": "./plugins" },
   "plugins": [
-    { "name": "shared", "source": "./shared", "description": "Company-wide skills" },
-    { "name": "ios", "source": "./ios", "description": "iOS engineering skills" },
-    { "name": "android", "source": "./android", "description": "Android engineering skills" },
-    { "name": "backend", "source": "./backend", "description": "Backend engineering skills" }
+    {
+      "name": "shared",
+      "source": "./shared",
+      "description": "Company-wide skills"
+    },
+    {
+      "name": "ios",
+      "source": "./ios",
+      "description": "iOS engineering skills"
+    },
+    {
+      "name": "android",
+      "source": "./android",
+      "description": "Android engineering skills"
+    },
+    {
+      "name": "backend",
+      "source": "./backend",
+      "description": "Backend engineering skills"
+    }
   ]
 }
 ```

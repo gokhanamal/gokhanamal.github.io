@@ -30,7 +30,9 @@ const isActive = (path: string) => {
   Skip to content
 </a>
 
-<header class="app-layout flex flex-col items-center justify-between sm:flex-row">
+<header
+  class="app-layout flex flex-col items-center justify-between sm:flex-row"
+>
   <div
     id="top-nav-wrap"
     class:list={[
@@ -72,7 +74,10 @@ const isActive = (path: string) => {
         ]}
       >
         <li class="col-span-2">
-          <a href="/reading" class:list={{ "active-nav": isActive("/reading") }}>
+          <a
+            href="/reading"
+            class:list={{ "active-nav": isActive("/reading") }}
+          >
             Reading
           </a>
         </li>
