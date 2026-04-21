@@ -6,8 +6,8 @@ import Main from "@/layouts/Main.astro";
 import { SITE } from "@/config";
 
 type App = {
-  trackId: number;
-  trackName: string;
+  trackId?: number;
+  trackName?: string;
   description?: string;
   artworkUrl512?: string;
   formattedPrice?: string;
@@ -15,6 +15,11 @@ type App = {
   userRatingCount?: number;
   primaryGenreName?: string;
   trackViewUrl?: string;
+};
+
+type ItunesResult = App & {
+  wrapperType?: string;
+  artistLinkUrl?: string;
 };
 
 const DEVELOPER_ID = 1476997783;
@@ -29,7 +34,7 @@ let developerUrl = "https://apps.apple.com/us/developer/gokhan-namal/id147699778
 
 if (res.ok) {
   const data = await res.json();
-  const results = (data?.results ?? []) as any[];
+  const results = (data?.results ?? []) as ItunesResult[];
   const artist = results.find((r) => r.wrapperType === "artist");
   if (artist?.artistLinkUrl) developerUrl = artist.artistLinkUrl;
 
