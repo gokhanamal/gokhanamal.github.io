@@ -8,6 +8,7 @@ Hi, I’m **Gökhan Namal**.
 This is my personal site — short notes about building, investing, and life.
 
 ## Links
+
 - Website: <https://gnamal.com>
 - GitHub: <https://github.com/gokhanamal>
 - X/Twitter: <https://x.com/gokhanamal>
@@ -16,8 +17,10 @@ This is my personal site — short notes about building, investing, and life.
 If you want to reach me, the easiest way is via LinkedIn or X.
 
 ## Writing
+
 - Beliefs: <https://gnamal.com/beliefs>
 
 ## Apps
+
 - App Store developer page: <https://apps.apple.com/us/developer/gokhan-namal/id1476997783>
 - This site: <https://gnamal.com/apps>

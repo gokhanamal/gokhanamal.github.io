@@ -6,8 +6,8 @@ import Main from "@/layouts/Main.astro";
 import { SITE } from "@/config";
 
 type App = {
-  trackId: number;
-  trackName: string;
+  trackId?: number;
+  trackName?: string;
   description?: string;
   artworkUrl512?: string;
   formattedPrice?: string;
@@ -17,25 +17,31 @@ type App = {
   trackViewUrl?: string;
 };
 
+type ItunesResult = App & {
+  wrapperType?: string;
+  artistLinkUrl?: string;
+};
+
 const DEVELOPER_ID = 1476997783;
 
 const res = await fetch(
   `https://itunes.apple.com/lookup?id=${DEVELOPER_ID}&entity=software`,
-  { headers: { "Accept": "application/json" } }
+  { headers: { Accept: "application/json" } }
 );
 
 let apps: App[] = [];
-let developerUrl = "https://apps.apple.com/us/developer/gokhan-namal/id1476997783";
+let developerUrl =
+  "https://apps.apple.com/us/developer/gokhan-namal/id1476997783";
 
 if (res.ok) {
   const data = await res.json();
-  const results = (data?.results ?? []) as any[];
-  const artist = results.find((r) => r.wrapperType === "artist");
+  const results = (data?.results ?? []) as ItunesResult[];
+  const artist = results.find(r => r.wrapperType === "artist");
   if (artist?.artistLinkUrl) developerUrl = artist.artistLinkUrl;
 
   apps = results
-    .filter((r) => r.wrapperType === "software")
-    .map((r) => ({
+    .filter(r => r.wrapperType === "software")
+    .map(r => ({
       trackId: r.trackId,
       trackName: r.trackName,
       description: r.description,
@@ -54,47 +60,69 @@ if (res.ok) {
   <Header />
   <Main pageTitle="Apps" pageDesc="A list of iOS apps I’ve published.">
     <p class="mt-2">
-      <a class="underline hover:text-accent" href={developerUrl} target="_blank" rel="noreferrer">
+      <a
+        class="underline hover:text-accent"
+        href={developerUrl}
+        target="_blank"
+        rel="noreferrer"
+      >
         View on the App Store
       </a>
     </p>
 
     <ul class="mt-6 grid gap-4 sm:grid-cols-2">
-      {apps.map((a) => (
-        <li class="rounded-xl border border-border p-4">
-          <a class="flex gap-4 hover:text-accent" href={a.trackViewUrl} target="_blank" rel="noreferrer">
-            {a.artworkUrl512 && (
-              <img
-                src={a.artworkUrl512}
-                alt=""
-                loading="lazy"
-                class="h-16 w-16 rounded-2xl border border-border object-cover"
-              />
-            )}
-            <div class="min-w-0">
-              <div class="font-semibold leading-snug">{a.trackName}</div>
-              <div class="mt-1 text-sm opacity-80 line-clamp-2">
-                {a.description ?? ""}
+      {
+        apps.map(a => (
+          <li class="rounded-xl border border-border p-4">
+            <a
+              class="flex gap-4 hover:text-accent"
+              href={a.trackViewUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              {a.artworkUrl512 && (
+                <img
+                  src={a.artworkUrl512}
+                  alt=""
+                  loading="lazy"
+                  class="h-16 w-16 rounded-2xl border border-border object-cover"
+                />
+              )}
+              <div class="min-w-0">
+                <div class="leading-snug font-semibold">{a.trackName}</div>
+                <div class="mt-1 line-clamp-2 text-sm opacity-80">
+                  {a.description ?? ""}
+                </div>
+                <div class="mt-2 text-xs opacity-70">
+                  {a.primaryGenreName ? `${a.primaryGenreName}` : ""}
+                  {a.formattedPrice ? ` · ${a.formattedPrice}` : ""}
+                  {typeof a.averageUserRating === "number"
+                    ? ` · ★ ${a.averageUserRating.toFixed(1)}`
+                    : ""}
+                </div>
               </div>
-              <div class="mt-2 text-xs opacity-70">
-                {a.primaryGenreName ? `${a.primaryGenreName}` : ""}
-                {a.formattedPrice ? ` · ${a.formattedPrice}` : ""}
-                {typeof a.averageUserRating === "number" ? ` · ★ ${a.averageUserRating.toFixed(1)}` : ""}
-              </div>
-            </div>
-          </a>
-        </li>
-      ))}
+            </a>
+          </li>
+        ))
+      }
     </ul>
 
-    {apps.length === 0 && (
-      <p class="mt-6 opacity-80">
-        Couldn’t load the App Store list right now. You can still view it here:
-        <a class="underline hover:text-accent" href={developerUrl} target="_blank" rel="noreferrer">
-          {developerUrl}
-        </a>
-      </p>
-    )}
+    {
+      apps.length === 0 && (
+        <p class="mt-6 opacity-80">
+          Couldn’t load the App Store list right now. You can still view it
+          here:
+          <a
+            class="underline hover:text-accent"
+            href={developerUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
+            {developerUrl}
+          </a>
+        </p>
+      )
+    }
   </Main>
   <Footer />
 </Layout>
